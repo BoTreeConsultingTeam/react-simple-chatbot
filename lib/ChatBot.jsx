@@ -242,12 +242,14 @@ class ChatBot extends Component {
     if (data && data.trigger) {
       currentStep.trigger = this.getTriggeredStep(data.trigger, data.value);
     }
-
+    console.log('======DATA======', data);
     if (isEnd) {
       this.handleEnd();
     } else if ((currentStep.options && data) || (data && data.customeOption) ) {
+      console.log('======INSIDE IF CONDITION======')
       if (data.customeOption){
         const option = data.customeOption;
+        console.log('=====OPTION======', option)
       }else{
         const option = currentStep.options.filter(o => o.value === data.value)[0];
       }
