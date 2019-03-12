@@ -245,8 +245,13 @@ class ChatBot extends Component {
 
     if (isEnd) {
       this.handleEnd();
-    } else if (currentStep.options && data) {
-      const option = currentStep.options.filter(o => o.value === data.value)[0];
+    } else if ((currentStep.options && data) || (data && data.customeOption) ) {
+      if (data.customeOption){
+        const option = data.customeOption;
+      }else{
+        const option = currentStep.options.filter(o => o.value === data.value)[0];
+      }
+      
       const trigger = this.getTriggeredStep(option.trigger, currentStep.value);
       delete currentStep.options;
 
