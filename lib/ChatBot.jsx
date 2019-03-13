@@ -222,7 +222,6 @@ class ChatBot extends Component {
   }
 
   triggerNextStep = (data) => {
-    console.error('=======In NEXT STEP========');
     const { enableMobileAutoFocus } = this.props;
     const {
       defaultUserSettings,
@@ -245,14 +244,14 @@ class ChatBot extends Component {
     }
     if (isEnd) {
       this.handleEnd();
-    } else if ((currentStep.options && data) || (data && data.customeOption) ) {
+    } else if ((currentStep.options && data) || (data && data.customeOption)) {
       let option = null;
-      if (data.customeOption){
+      if (data.customeOption) {
         option = data.customeOption;
-      }else{
-        option = currentStep.options.filter(o => o.value === data.value)[0];
+      } else {
+        [option] = currentStep.options.filter(o => o.value === data.value);
       }
-      
+
       const trigger = this.getTriggeredStep(option.trigger, currentStep.value);
       delete currentStep.options;
       delete currentStep.component;
